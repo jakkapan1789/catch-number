@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Avatar,
+  Box,
+} from "@mui/material";
 
 const LiffComponent = () => {
   const [profile, setProfile] = useState(null); // State to hold user profile data
@@ -33,19 +41,37 @@ const LiffComponent = () => {
   };
 
   return (
-    <div>
-      <h1>LIFF Example</h1>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Typography variant="h4" component="h1" align="center" gutterBottom>
+        User Profile
+      </Typography>
       {profile ? (
-        <div>
-          <img src={profile.pictureUrl} alt="User Profile" />
-          <p>User Name: {profile.displayName}</p>
-          <p>User ID: {profile.userId}</p>
-          <p>Status Message: {profile.statusMessage || "No status message"}</p>
-        </div>
+        <Card variant="outlined">
+          <CardContent>
+            <Box display="flex" alignItems="center" mb={2}>
+              <Avatar
+                alt="User Profile"
+                src={profile.pictureUrl}
+                sx={{ width: 80, height: 80, mr: 2 }}
+              />
+              <Box>
+                <Typography variant="h6">{profile.displayName}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  User ID: {profile.userId}
+                </Typography>
+              </Box>
+            </Box>
+            <Typography variant="body2">
+              Status Message: {profile.statusMessage || "No status message"}
+            </Typography>
+          </CardContent>
+        </Card>
       ) : (
-        <p>No profile data available.</p>
+        <Typography variant="body1" align="center">
+          No profile data available.
+        </Typography>
       )}
-    </div>
+    </Container>
   );
 };
 
