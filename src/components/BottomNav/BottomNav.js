@@ -122,6 +122,7 @@ const BottomNav = () => {
       elevation={3}
     >
       <BottomNavigation
+        sx={{ height: "74px" }}
         value={router.pathname}
         onChange={(event, newValue) => {
           router.push(newValue);

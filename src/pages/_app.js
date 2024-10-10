@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import Head from "next/head";
+import liff from "@line/liff";
 
 import { CssBaseline } from "@mui/material";
 import Layout from "@/components/Layout/Layout";
@@ -8,6 +9,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const App = ({ Component, pageProps }) => {
   const LPtheme = createTheme(getLPTheme("light"));
+
   return (
     <>
       <Head>

@@ -9,7 +9,7 @@ const Index = () => {
     try {
       await liff.init({ liffId: "2006444115-GzEX7djW" });
       const profile = await liff.getProfile();
-      console.log("User Profile:", profile);
+      // console.log("User Profile:", profile);
       // You can now use profile.displayName, profile.pictureUrl, etc.
     } catch (error) {
       console.error("Error fetching user profile:", error);
