@@ -67,11 +67,15 @@ const NumberGrid = ({ userName }) => {
                 </div>
               </Button> */}
               <Button
-                fullWidth
                 onClick={() => handleNumberClick(index)}
                 variant="contained"
                 disabled={!!number.owner}
-                sx={{ width: "100px", height: "100px", bgcolor: "#C62E2E" }}
+                sx={{
+                  width: { xs: "40vw", sm: "100px" }, // Responsive width for mobile
+                  height: { xs: "40vw", sm: "100px" }, // Responsive height for mobile
+                  bgcolor: "#C62E2E",
+                  borderRadius: "0", // Optional: Remove rounded corners for a sharp square shape
+                }}
               >
                 <div>
                   <Typography variant="h6">{number.value}</Typography>
