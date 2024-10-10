@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import liff from "@line/liff";
 
 const LiffComponent = () => {
   const [profile, setProfile] = useState(null); // State to hold user profile data
-  const [loading, setLoading] = useState(true); // State to manage loading state
 
   useEffect(() => {
     const initLiff = async () => {
@@ -28,15 +27,10 @@ const LiffComponent = () => {
       const profileData = await liff.getProfile();
       console.log("User Profile:", profileData);
       setProfile(profileData); // Update state with profile data
-      setLoading(false); // Set loading to false
     } catch (error) {
       console.error("Error fetching user profile:", error);
-      setLoading(false); // Set loading to false on error
     }
   };
-  if (loading) {
-    return <div>Loading...</div>; // Show loading state
-  }
 
   return (
     <div>

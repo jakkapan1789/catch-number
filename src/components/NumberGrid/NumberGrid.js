@@ -51,7 +51,7 @@ const NumberGrid = ({ userName }) => {
         <Grid container spacing={2}>
           {numbers.map((number, index) => (
             <Grid item xs={3} sm={3} md={3} key={number.value}>
-              {/* <Button
+              <Button
                 fullWidth
                 onClick={() => handleNumberClick(index)}
                 variant="contained"
@@ -65,8 +65,8 @@ const NumberGrid = ({ userName }) => {
                     <Typography variant="body2">{number.owner}</Typography>
                   )}
                 </div>
-              </Button> */}
-              <Button
+              </Button>
+              {/* <Button
                 onClick={() => handleNumberClick(index)}
                 variant="contained"
                 disabled={!!number.owner}
@@ -83,7 +83,7 @@ const NumberGrid = ({ userName }) => {
                     <Typography variant="body2">{number.owner}</Typography>
                   )}
                 </div>
-              </Button>
+              </Button> */}
             </Grid>
           ))}
         </Grid>
