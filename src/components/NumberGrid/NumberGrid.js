@@ -9,6 +9,11 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Box, Container } from "@mui/material";
 import { toast } from "sonner";
+import Slide from "@mui/material/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const NumberGrid = ({ userName }) => {
   const [numbers, setNumbers] = useState(
@@ -46,7 +51,7 @@ const NumberGrid = ({ userName }) => {
         <Grid container spacing={2}>
           {numbers.map((number, index) => (
             <Grid item xs={3} sm={3} md={3} key={number.value}>
-              <Button
+              {/* <Button
                 fullWidth
                 onClick={() => handleNumberClick(index)}
                 variant="contained"
@@ -60,12 +65,30 @@ const NumberGrid = ({ userName }) => {
                     <Typography variant="body2">{number.owner}</Typography>
                   )}
                 </div>
+              </Button> */}
+              <Button
+                fullWidth
+                onClick={() => handleNumberClick(index)}
+                variant="contained"
+                disabled={!!number.owner}
+                sx={{ width: "100px", height: "100px", bgcolor: "#C62E2E" }}
+              >
+                <div>
+                  <Typography variant="h6">{number.value}</Typography>
+                  {number.owner && (
+                    <Typography variant="body2">{number.owner}</Typography>
+                  )}
+                </div>
               </Button>
             </Grid>
           ))}
         </Grid>
 
-        <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+        <Dialog
+          open={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          TransitionComponent={Transition}
+        >
           <DialogTitle>ยืนยันการเลือก</DialogTitle>
           <DialogContent>
             <DialogContentText>
