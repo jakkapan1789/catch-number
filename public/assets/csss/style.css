@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Kanit';
+    src: url('../fonts/Kanit-Regular.ttf') format('truetype');
+}
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+  
+
+  
+.profile{
+    background-image: url("../images/ball.jpeg");
+}  
