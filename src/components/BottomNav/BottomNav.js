@@ -114,15 +114,15 @@ const BottomNav = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        width: "100%", // Set width to 100% for auto adjustment
-        maxWidth: 500, // Optional: Set a max width if needed
+        width: "100%",
+        maxWidth: 400,
         margin: "0 auto",
         boxShadow: "none",
       }}
       elevation={3}
     >
       <BottomNavigation
-        sx={{ height: "74px" }}
+        sx={{ height: "54px" }}
         value={router.pathname}
         onChange={(event, newValue) => {
           router.push(newValue);

@@ -12,20 +12,18 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 const LINELoginButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "#06c755", // LINE Green Color
+  backgroundColor: "#06c755",
   color: "#FFFFFF",
-  //   "&:hover": {
-  //     backgroundColor: "#009900",
-  //   },
+  fontSize: 16,
 }));
 
 const LiffComponent = () => {
-  const [profile, setProfile] = useState(null); // State to hold user profile data
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const initLiff = async () => {
       try {
-        await liff.init({ liffId: "2006444115-GzEX7djW" }); // Replace with your LIFF ID
+        await liff.init({ liffId: "2006444115-GzEX7djW" });
         if (!liff.isLoggedIn()) {
           //   liff.login(); // Redirect to LINE login if not logged in
         } else {
@@ -55,25 +53,29 @@ const LiffComponent = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      {profile ? (
-        <Card variant="outlined">
+    <>
+      {!profile ? (
+        <Card
+          // variant="outlined"
+          sx={{ maxWidth: 345, boxShadow: 0 }}
+        >
           <CardContent>
-            <Box
-              display="flex"
-              alignContent={"center"}
-              justifyContent={"center"}
-              alignItems="center"
-              mb={2}
-            >
+            <Box display="flex" flexDirection="column" alignItems="center">
               <Avatar
                 alt="User Profile"
                 src={profile?.pictureUrl}
-                sx={{ width: 100, height: 100, mr: 2 }}
+                sx={{ width: 120, height: 120, mb: 2 }}
               />
-              <Box>
-                <Typography variant="h6">{profile?.displayName}</Typography>
-              </Box>
+              <Typography variant="h5" fontWeight="bold" textAlign="center">
+                {profile ? profile.displayName : "Name"}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                textAlign="center"
+              >
+                {profile ? profile.statusMessage : "No status available"}
+              </Typography>
             </Box>
           </CardContent>
         </Card>
@@ -86,7 +88,7 @@ const LiffComponent = () => {
               <img
                 src="/images/line.png"
                 alt="LINE Logo"
-                style={{ width: 24, height: 24 }}
+                style={{ width: 36, height: 36 }}
               />
             }
           >
@@ -94,7 +96,7 @@ const LiffComponent = () => {
           </LINELoginButton>
         </Stack>
       )}
-    </Container>
+    </>
   );
 };
 

@@ -1,15 +1,17 @@
 import React from "react";
 import { Typography } from "@mui/material";
 
-const Booking = () => {
+const MyBookings = () => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Booking Page
+        My Bookings
       </Typography>
-      <Typography variant="body1">Welcome to the Booking page!</Typography>
+      <Typography variant="body1">
+        Here you can see all your bookings.
+      </Typography>
     </div>
   );
 };
 
-export default Booking;
+export default MyBookings;

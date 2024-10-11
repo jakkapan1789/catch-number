@@ -4,11 +4,7 @@ import LiffComponent from "@/components/LiffComponent/LiffComponent";
 
 const Profile = () => {
   return (
-    <div>
-      {/* <Typography variant="h4" gutterBottom>
-        Profile Page
-      </Typography>
-      <Typography variant="body1">Here is your profile information.</Typography> */}
+    <div data-aos="fade-up" data-aos-duration="300">
       <LiffComponent />
     </div>
   );

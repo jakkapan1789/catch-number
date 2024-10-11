@@ -8,7 +8,7 @@ const Header = () => {
       style={{
         position: "fixed",
         width: "100%", // Set width to 100% for auto adjustment
-        maxWidth: 500, // Optional: Set a max width if needed
+        maxWidth: 400, // Optional: Set a max width if needed
         zIndex: 10,
       }}
     >

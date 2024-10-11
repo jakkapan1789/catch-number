@@ -29,7 +29,7 @@ import React from "react";
 import Header from "../Header/Header";
 import BottomNav from "../BottomNav/BottomNav";
 import { Box, Container } from "@mui/material";
-import Aos from "aos";
+// import Aos from "aos";
 
 const Layout = ({ children }) => {
   return (
@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
       margin="0 auto"
       sx={{
         width: "100%", // Set width to 100% for auto adjustment
-        maxWidth: 500, // Optional: Set a max width if needed
+        maxWidth: 400, // Optional: Set a max width if needed
       }}
     >
       <Header />
