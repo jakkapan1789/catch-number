@@ -116,27 +116,29 @@ const Booking = () => {
                     {booking.status}
                   </Typography>
                 </Stack>
+              </Box>
+              <Stack direction={"row"}>
                 <Typography variant="caption" color="error" sx={{ mt: 2 }}>
                   เวลาในการชำระเงิน: {formatTime(booking.timeLeft)}
                 </Typography>
-              </Box>
-              <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  size="small"
-                  onClick={() => handleCancel(booking.id)}
-                >
-                  ยกเลิกการจอง
-                </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  size="small"
-                  onClick={() => handlePayment(booking.id)}
-                >
-                  ชำระเงิน
-                </Button>
+                <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    onClick={() => handleCancel(booking.id)}
+                  >
+                    ยกเลิกการจอง
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    size="small"
+                    onClick={() => handlePayment(booking.id)}
+                  >
+                    ชำระเงิน
+                  </Button>
+                </Stack>
               </Stack>
             </CardContent>
           </Card>

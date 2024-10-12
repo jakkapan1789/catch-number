@@ -46,6 +46,7 @@ const LiffComponent = () => {
 
   const fetchUserProfile = async () => {
     try {
+      await liff.init({ liffId: "2006444115-GzEX7djW" });
       const profileData = await liff.getProfile();
       setProfile(profileData);
     } catch (error) {
