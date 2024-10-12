@@ -29,6 +29,8 @@ const LiffComponent = () => {
       try {
         await liff.init({ liffId: "2006444115-GzEX7djW" });
         if (!liff.isLoggedIn()) {
+          const profileData = await liff.getProfile();
+          setProfile(profileData);
           setLoading(false); // Stop loading if not logged in
         } else {
           await fetchUserProfile(); // User is logged in, fetch profile
@@ -45,7 +47,7 @@ const LiffComponent = () => {
   const fetchUserProfile = async () => {
     try {
       const profileData = await liff.getProfile();
-      setProfile(profileData); // Update state with profile data
+      setProfile(profileData);
     } catch (error) {
       console.error("Error fetching user profile:", error);
     } finally {
