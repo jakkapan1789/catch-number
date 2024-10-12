@@ -53,7 +53,8 @@ const Index = () => {
           liff.login(); // Redirect to LINE login if not logged in
         } else {
           // User is logged in, fetch user profile
-          await fetchUserProfile();
+          const profileData = await liff.getProfile();
+          console.log("profileData", profileData);
         }
       } catch (error) {
         console.error("LIFF Initialization failed:", error);
