@@ -22,31 +22,31 @@ const LINELoginButton = styled(Button)(({ theme }) => ({
 
 const LiffComponent = () => {
   const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true); // State to manage loading spinner
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const initLiff = async () => {
       try {
         await liff.init({ liffId: "2006444115-GzEX7djW" });
-        if (!liff.isLoggedIn()) {
-          const profileData = await liff.getProfile();
-          setProfile(profileData);
-          setLoading(false); // Stop loading if not logged in
+        if (liff.isLoggedIn()) {
+          await fetchUserProfile(); // Fetch profile if logged in
         } else {
-          await fetchUserProfile(); // User is logged in, fetch profile
+          setLoading(false); // Not logged in, stop loading
         }
       } catch (error) {
         console.error("LIFF Initialization failed:", error);
-        setLoading(false); // Stop loading on error
+        setLoading(false);
       }
     };
 
-    initLiff();
+    liff.ready.then(() => {
+      // Check login status when LIFF is fully initialized
+      initLiff();
+    });
   }, []);
 
   const fetchUserProfile = async () => {
     try {
-      await liff.init({ liffId: "2006444115-GzEX7djW" });
       const profileData = await liff.getProfile();
       setProfile(profileData);
     } catch (error) {
@@ -58,8 +58,6 @@ const LiffComponent = () => {
 
   const handleLoginLine = async () => {
     liff.login();
-    setLoading(true); // Start loading after login
-    fetchUserProfile();
   };
 
   return (
@@ -89,14 +87,14 @@ const LiffComponent = () => {
                     sx={{ width: 120, height: 120, mb: 2 }}
                   />
                   <Typography variant="h5" fontWeight="bold" textAlign="center">
-                    {profile ? profile.displayName : "Name"}
+                    {profile?.displayName || "Name"}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     textAlign="center"
                   >
-                    {profile ? profile.statusMessage : "No status available"}
+                    {profile?.statusMessage || "No status available"}
                   </Typography>
                 </Box>
               </CardContent>
