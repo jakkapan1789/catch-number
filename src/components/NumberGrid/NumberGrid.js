@@ -48,9 +48,6 @@ const NumberGrid = ({ userName }) => {
   return (
     <Box id="about" sx={{ backgroundColor: "gray.100" }}>
       <Grid container spacing={1}>
-        <Grid item xs={12} md={12} sm={12}>
-          <CardMedia component="img" image="/images/ted2.jpg" />
-        </Grid>
         {numbers.map((number, index) => (
           <Grid item xs={3} sm={3} md={3} key={number.value}>
             <Button
