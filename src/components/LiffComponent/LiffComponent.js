@@ -48,6 +48,7 @@ const LiffComponent = () => {
     }
   };
   const handleLoginLine = async () => {
+    await liff.init({ liffId: "2006444115-GzEX7djW" });
     liff.login();
     fetchUserProfile();
   };
