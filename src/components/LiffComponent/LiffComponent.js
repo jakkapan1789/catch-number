@@ -29,20 +29,16 @@ const LiffComponent = () => {
       try {
         await liff.init({ liffId: "2006444115-GzEX7djW" });
         if (liff.isLoggedIn()) {
-          await fetchUserProfile(); // Fetch profile if logged in
+          await fetchUserProfile();
         } else {
-          setLoading(false); // Not logged in, stop loading
+          setLoading(false);
         }
       } catch (error) {
         console.error("LIFF Initialization failed:", error);
         setLoading(false);
       }
     };
-
-    liff.ready.then(() => {
-      // Check login status when LIFF is fully initialized
-      initLiff();
-    });
+    initLiff();
   }, []);
 
   const fetchUserProfile = async () => {
@@ -52,12 +48,18 @@ const LiffComponent = () => {
     } catch (error) {
       console.error("Error fetching user profile:", error);
     } finally {
-      setLoading(false); // Stop loading after fetching profile
+      setLoading(false);
     }
   };
 
   const handleLoginLine = async () => {
-    liff.login();
+    try {
+      liff.login();
+      setLoading(true); // Start loading when login is triggered
+    } catch (error) {
+      console.error("Error during login:", error);
+      setLoading(false); // Stop loading if login fails
+    }
   };
 
   return (

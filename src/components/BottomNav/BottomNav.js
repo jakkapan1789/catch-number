@@ -1,111 +1,26 @@
-// // import React from "react";
-// // import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-// // import { useRouter } from "next/router";
-// // import { CalendarToday, List, Person } from "@mui/icons-material";
-
-// // const BottomNav = () => {
-// //   const router = useRouter();
-// //   const navItems = [
-// //     { path: "/", label: "กิจกรรม", icon: <CalendarToday /> },
-// //     { path: "/my-bookings", label: "กระเป๋าของฉัน", icon: <List /> },
-// //     { path: "/profile", label: "โปรไฟล์", icon: <Person /> },
-// //   ];
-
-// //   return (
-// //     <Paper
-// //       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-// //       elevation={3}
-// //     >
-// //       <BottomNavigation
-// //         value={router.pathname}
-// //         onChange={(event, newValue) => {
-// //           router.push(newValue);
-// //         }}
-// //       >
-// //         {navItems.map((item) => (
-// //           <BottomNavigationAction
-// //             key={item.path}
-// //             label={item.label}
-// //             icon={item.icon}
-// //             value={item.path}
-// //             showLabel
-// //             sx={{
-// //               color:
-// //                 router.pathname === item.path ? "error.main" : "text.secondary",
-// //             }}
-// //           />
-// //         ))}
-// //       </BottomNavigation>
-// //     </Paper>
-// //   );
-// // };
-
-// // export default BottomNav;
-
-// import React from "react";
-// import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-// import { useRouter } from "next/router";
-// import { CalendarToday, List, Person } from "@mui/icons-material";
-
-// const BottomNav = () => {
-//   const router = useRouter();
-//   const navItems = [
-//     { path: "/", label: "กิจกรรม", icon: <CalendarToday /> },
-//     { path: "/my-bookings", label: "กระเป๋าของฉัน", icon: <List /> },
-//     { path: "/profile", label: "โปรไฟล์", icon: <Person /> },
-//   ];
-
-//   return (
-//     <Paper
-//       sx={{
-//         position: "fixed",
-//         bottom: 0,
-//         left: 0,
-//         right: 0,
-//         width: 500,
-//         margin: "0 auto",
-//         boxShadow: "none",
-//       }}
-//       elevation={3}
-//     >
-//       <BottomNavigation
-//         value={router.pathname}
-//         onChange={(event, newValue) => {
-//           router.push(newValue);
-//         }}
-//       >
-//         {navItems.map((item) => (
-//           <BottomNavigationAction
-//             key={item.path}
-//             label={item.label}
-//             icon={item.icon}
-//             value={item.path}
-//             showLabel
-//             sx={{
-//               color:
-//                 router.pathname === item.path ? "error.main" : "text.secondary",
-//             }}
-//           />
-//         ))}
-//       </BottomNavigation>
-//     </Paper>
-//   );
-// };
-
-// export default BottomNav;
-
-import React from "react";
+import React, { useState } from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { useRouter } from "next/router";
 import { CalendarToday, List, Person } from "@mui/icons-material";
 
 const BottomNav = () => {
   const router = useRouter();
+  const [selectedPath, setSelectedPath] = useState(router.pathname); // สถานะที่ใช้ในการเก็บ path ที่เลือก
+
   const navItems = [
-    { path: "/", label: "กิจกรรม", icon: <CalendarToday /> },
-    { path: "/my-bookings", label: "กระเป๋าของฉัน", icon: <List /> },
-    { path: "/profile", label: "โปรไฟล์", icon: <Person /> },
+    { paths: ["/"], label: "กิจกรรม", icon: <CalendarToday /> },
+    {
+      paths: ["/my-bookings", "/payment-summary"],
+      label: "กระเป๋าของฉัน",
+      icon: <List />,
+    },
+    { paths: ["/profile"], label: "โปรไฟล์", icon: <Person /> },
   ];
+
+  const handleNavigationChange = (newValue) => {
+    setSelectedPath(newValue); // เปลี่ยนสถานะทันทีที่มีการคลิก
+    router.push(newValue); // เปลี่ยนเส้นทางไปยังหน้าใหม่
+  };
 
   return (
     <Paper
@@ -122,22 +37,23 @@ const BottomNav = () => {
       elevation={3}
     >
       <BottomNavigation
-        sx={{ height: "54px" }}
-        value={router.pathname}
+        sx={{ height: "58px" }}
+        value={selectedPath} // ใช้ selectedPath จาก useState
         onChange={(event, newValue) => {
-          router.push(newValue);
+          handleNavigationChange(newValue); // เรียกใช้งานฟังก์ชันเปลี่ยนสถานะเมื่อคลิก
         }}
       >
         {navItems.map((item) => (
           <BottomNavigationAction
-            key={item.path}
+            key={item.paths[0]}
             label={item.label}
             icon={item.icon}
-            value={item.path}
+            value={item.paths[0]}
             showLabel
             sx={{
-              color:
-                router.pathname === item.path ? "error.main" : "text.secondary",
+              color: item.paths.includes(selectedPath)
+                ? "error.main"
+                : "text.secondary",
             }}
           />
         ))}
