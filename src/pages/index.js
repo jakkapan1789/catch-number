@@ -1,97 +1,3 @@
-// import React from "react";
-// import {
-//   Typography,
-//   Card,
-//   Stack,
-//   Button,
-//   Divider,
-//   CardContent,
-//   Box,
-//   CardMedia,
-// } from "@mui/material";
-
-// const products = [
-//   {
-//     productId: 1,
-//     productName: "Ted 2 สุดฮ็อต",
-//     price: 20,
-//   },
-// ];
-// const Index = () => {
-//   return (
-//     <div>
-//       <Typography alignContent={"center"} variant="h6" gutterBottom>
-//         กิจกรรม
-//       </Typography>
-//       {products.map((product, index) => (
-//         <div data-aos="fade-up" data-aos-duration="300">
-//           <Activitycard data={product} />
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default Index;
-
-// const Activitycard = ({ data }) => {
-//   const { productId, productName, price } = data;
-
-//   return (
-//     <>
-//       <Card sx={{ mb: 1, borderRadius: 2, boxShadow: 0 }}>
-//         <CardContent>
-//           <Box display="flex" flexDirection="column" sx={{ mt: -1 }}>
-//             <Stack
-//               direction={"row"}
-//               justifyContent={"space-between"}
-//               alignItems={"center"}
-//             >
-//               <Stack direction={"row"} alignItems={"center"}>
-//                 <Typography variant="body" fontWeight={"bold"}>
-//                   {productName}
-//                 </Typography>
-//               </Stack>
-//             </Stack>
-//           </Box>
-//           <Stack direction={"row"}>
-//             <CardMedia
-//               component="img"
-//               sx={{ height: 250 }}
-//               image="/images/ted2.jpg"
-//             />
-//           </Stack>
-
-//           <Stack
-//             direction="row"
-//             spacing={1}
-//             sx={{ mt: 1 }}
-//             alignItems={"center"}
-//             justifyContent={"space-between"}
-//           >
-//             <Typography variant="body1" color="error">
-//               จุ่มละ : ฿{price.toLocaleString()}
-//             </Typography>
-//           </Stack>
-//           <Divider sx={{ mt: 0.7, mb: 1 }} />
-
-//           <Stack direction={"row"} sx={{ mb: -2 }}>
-//             <Button
-//               fullWidth
-//               variant="contained"
-//               color="error"
-//               size="small"
-//               onClick={() => handleCancel(booking.id)}
-//             >
-//               เล่น
-//             </Button>
-//           </Stack>
-//         </CardContent>
-//       </Card>
-//     </>
-//   );
-// };
-
 import React, { useState } from "react";
 import {
   Typography,
@@ -148,18 +54,10 @@ const Index = () => {
           </div>
         ))
       ) : (
-        <NumberGrid product={selectedProduct} userName={userName} />
-      )}
-
-      {/* {products.map((product, index) => (
-        <div key={index} data-aos="fade-up" data-aos-duration="300">
-          <ActivityCard data={product} onPlayClick={handlePlayClick} />
+        <div>
+          <NumberGrid product={selectedProduct} userName={userName} />
         </div>
-      ))}
-
-      {selectedProduct && (
-        <NumberGrid product={selectedProduct} userName={userName} />
-      )} */}
+      )}
     </div>
   );
 };
@@ -279,11 +177,6 @@ const NumberGrid = ({ product, userName }) => {
                 <Typography variant="h6" align="center">
                   {number.value}
                 </Typography>
-                {/* {number.owner && (
-                  <Typography variant="body2" align="center">
-                    {number.owner}
-                  </Typography>
-                )} */}
               </div>
             </Button>
           </Grid>

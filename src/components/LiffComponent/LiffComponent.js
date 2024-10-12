@@ -15,7 +15,6 @@ const LINELoginButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#06c755",
   color: "#FFFFFF",
   textTransform: "none",
-  // fontSize: 16,
 }));
 
 const LiffComponent = () => {
@@ -42,7 +41,7 @@ const LiffComponent = () => {
   const fetchUserProfile = async () => {
     try {
       const profileData = await liff.getProfile();
-      //   console.log("User Profile:", profileData);
+      console.log("User Profile:", profileData);
       setProfile(profileData); // Update state with profile data
     } catch (error) {
       console.error("Error fetching user profile:", error);
