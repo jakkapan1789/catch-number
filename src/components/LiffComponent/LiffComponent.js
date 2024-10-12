@@ -25,7 +25,7 @@ const LiffComponent = () => {
       try {
         await liff.init({ liffId: "2006444115-GzEX7djW" }); // Replace with your LIFF ID
         if (!liff.isLoggedIn()) {
-          liff.login(); // Redirect to LINE login if not logged in
+          // liff.login(); // Redirect to LINE login if not logged in
         } else {
           // User is logged in, fetch user profile
           await fetchUserProfile();
