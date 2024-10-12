@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Card,
@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { toast } from "sonner";
 import Slide from "@mui/material/Slide";
+import liff from "@line/liff";
 
 const products = [
   {
@@ -40,6 +41,27 @@ const Index = () => {
     setSelectedProduct(product);
     setDisplayGame(!displayGame);
   };
+
+  useEffect(() => {
+    const initLiff = async () => {
+      try {
+        await liff
+          .init({ liffId: "2006444115-GzEX7djW" })
+          .then(() => console.log("login"));
+        if (!liff.isLoggedIn()) {
+          console.log("login");
+          liff.login(); // Redirect to LINE login if not logged in
+        } else {
+          // User is logged in, fetch user profile
+          await fetchUserProfile();
+        }
+      } catch (error) {
+        console.error("LIFF Initialization failed:", error);
+      }
+    };
+
+    initLiff();
+  }, []);
 
   return (
     <div>

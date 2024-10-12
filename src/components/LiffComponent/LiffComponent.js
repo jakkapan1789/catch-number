@@ -11,6 +11,7 @@ import {
   Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
 const LINELoginButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#06c755",
   color: "#FFFFFF",
@@ -25,7 +26,7 @@ const LiffComponent = () => {
       try {
         await liff.init({ liffId: "2006444115-GzEX7djW" }); // Replace with your LIFF ID
         if (!liff.isLoggedIn()) {
-          // liff.login(); // Redirect to LINE login if not logged in
+          liff.login(); // Redirect to LINE login if not logged in
         } else {
           // User is logged in, fetch user profile
           await fetchUserProfile();
@@ -47,10 +48,10 @@ const LiffComponent = () => {
       console.error("Error fetching user profile:", error);
     }
   };
-  const handleLoginLine = async () => {
-    await liff.init({ liffId: "2006444115-GzEX7djW" });
-    liff.login();
-    fetchUserProfile();
+
+  const handleLoginLine = () => {
+    // This function will be triggered on button click
+    liff.login(); // Redirects to LINE login
   };
 
   return (
@@ -61,18 +62,18 @@ const LiffComponent = () => {
             <Box display="flex" flexDirection="column" alignItems="center">
               <Avatar
                 alt="User Profile"
-                src={profile?.pictureUrl}
+                src={profile.pictureUrl}
                 sx={{ width: 120, height: 120, mb: 2 }}
               />
               <Typography variant="h5" fontWeight="bold" textAlign="center">
-                {profile ? profile.displayName : "Name"}
+                {profile.displayName || "Name"}
               </Typography>
               <Typography
                 variant="body2"
                 color="textSecondary"
                 textAlign="center"
               >
-                {profile ? profile.statusMessage : "No status available"}
+                {profile.statusMessage || "No status available"}
               </Typography>
             </Box>
           </CardContent>
