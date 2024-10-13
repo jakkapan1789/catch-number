@@ -14,6 +14,7 @@ import {
   Skeleton,
 } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
+import axios from "axios";
 const Booking = () => {
   const [bookings, setBookings] = useState([
     {
@@ -71,7 +72,8 @@ const Booking = () => {
     setBookings(bookings.filter((booking) => booking.id !== id));
   };
 
-  const handlePayment = () => {
+  const [qrCodeUrl, setQrCodeUrl] = useState(null);
+  const handlePayment = async () => {
     // สร้าง paymentId ใหม่
     const newPaymentId = Date.now(); // ใช้ timestamp เป็น paymentId
     setPaymentId(newPaymentId);
@@ -86,6 +88,29 @@ const Booking = () => {
     );
 
     setShowSummary(true); // เปลี่ยน state เพื่อแสดง PaymentSummary
+    const amount = bookings.reduce(
+      (acc, booking) =>
+        acc + (booking.paymentId === paymentId ? booking.price : 0),
+      0
+    );
+    const orderId = 1;
+    const res = await axios.post(
+      "/api/payment/promptpay",
+      {
+        amount,
+        orderId,
+        // Send the amount and order ID
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = res.data;
+
+    setQrCodeUrl(data.charge.source.scannable_code.image.download_uri);
   };
 
   const handleConfirmPayment = () => {
@@ -171,7 +196,7 @@ const Booking = () => {
             <Typography variant="caption" color="textSecondary">
               QR Code สำหรับชำระเงิน
             </Typography>
-            <QrCodeCard qrCodeUrl={""} title={"Payment"} />
+            <QrCodeCard qrCodeUrl={qrCodeUrl} title={"Payment"} />
           </Stack>
 
           <Stack sx={{ mt: 2 }} alignItems="center">
@@ -344,7 +369,7 @@ const QrCodeCard = ({ qrCodeUrl, title }) => {
       {qrCodeUrl ? (
         <CardMedia
           component="img"
-          height="200"
+          height="400"
           image={qrCodeUrl}
           alt="QR Code"
           sx={{ padding: "1rem", objectFit: "contain" }}
@@ -352,8 +377,8 @@ const QrCodeCard = ({ qrCodeUrl, title }) => {
       ) : (
         <Skeleton
           variant="rectangular"
-          width={200}
-          height={200}
+          width={300}
+          height={400}
           sx={{ padding: "1rem" }}
         />
       )}
