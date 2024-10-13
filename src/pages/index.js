@@ -42,27 +42,27 @@ const Index = () => {
     setDisplayGame(!displayGame);
   };
 
-  useEffect(() => {
-    const initLiff = async () => {
-      try {
-        await liff
-          .init({ liffId: "2006444115-GzEX7djW" })
-          .then(() => console.log("login"));
-        if (!liff.isLoggedIn()) {
-          console.log("login");
-          liff.login(); // Redirect to LINE login if not logged in
-        } else {
-          // User is logged in, fetch user profile
-          const profileData = await liff.getProfile();
-          console.log("profileData", profileData);
-        }
-      } catch (error) {
-        console.error("LIFF Initialization failed:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const initLiff = async () => {
+  //     try {
+  //       await liff
+  //         .init({ liffId: "2006444115-GzEX7djW" })
+  //         .then(() => console.log("login"));
+  //       if (!liff.isLoggedIn()) {
+  //         console.log("login");
+  //         liff.login(); // Redirect to LINE login if not logged in
+  //       } else {
+  //         // User is logged in, fetch user profile
+  //         const profileData = await liff.getProfile();
+  //         console.log("profileData", profileData);
+  //       }
+  //     } catch (error) {
+  //       console.error("LIFF Initialization failed:", error);
+  //     }
+  //   };
 
-    initLiff();
-  }, []);
+  //   initLiff();
+  // }, []);
 
   return (
     <div>
