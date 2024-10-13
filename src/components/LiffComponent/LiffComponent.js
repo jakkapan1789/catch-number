@@ -26,7 +26,7 @@ const LiffComponent = () => {
       try {
         await liff.init({ liffId: "2006444115-GzEX7djW" }); // Replace with your LIFF ID
         if (!liff.isLoggedIn()) {
-          liff.login(); // Redirect to LINE login if not logged in
+          // liff.login();
         } else {
           // User is logged in, fetch user profile
           await fetchUserProfile();
@@ -79,7 +79,13 @@ const LiffComponent = () => {
           </CardContent>
         </Card>
       ) : (
-        <Stack direction={"row"} justifyContent={"center"}>
+        <Box
+          // display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+          position={"stciky"}
+        >
           <LINELoginButton
             variant="contained"
             onClick={handleLoginLine}
@@ -93,7 +99,7 @@ const LiffComponent = () => {
           >
             Login with LINE
           </LINELoginButton>
-        </Stack>
+        </Box>
       )}
     </>
   );
